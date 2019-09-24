@@ -1,0 +1,39 @@
+$scale-factor: 8;
+$base-font-size: 1rem;
+$line-height-unit: 0.25rem;
+$base-line-height-multiple: 7;
+$use-calc: false;
+
+@mixin compose($font-size-degree: 0, $line-height-degree: 0) {
+  @include compose-font-size($font-size-degree);
+  @include compose-line-height($font-size-degree, $line-height-degree);
+}
+
+@mixin compose-font-size($font-size-degree: 0) {
+  // $font-size-degree: trunc($font-size-degree);
+  $n: $scale-factor;
+  $m: $scale-factor - $font-size-degree;
+
+  @if $font-size-degree == 0 {
+    font-size: $base-font-size;
+  } @else if $use-calc {
+    font-size: calc(#{$base-font-size} * #{$n} / #{$m});
+  } @else {
+    font-size: $base-font-size * $n / $m;
+  }
+}
+
+@mixin compose-line-height($font-size-degree: 0, $line-height-degree: 0) {
+  // $font-size-degree: trunc($font-size-degree);
+  // $line-height-degree: trunc($line-height-degree);
+  $scale-factor: $scale-factor;
+  $base-line-height-multiple: $base-line-height-multiple;
+  $n: ($base-line-height-multiple + $line-height-degree) *
+    ($scale-factor - $font-size-degree);
+  $m: $scale-factor * ($base-font-size / $line-height-unit);
+  @if $use-calc {
+    line-height: calc(1em * #{$n} / #{$m});
+  } @else {
+    line-height: $n / $m;
+  }
+}
