@@ -5,13 +5,8 @@ $base-font-size: 1rem;
 $line-height-unit: 0.25rem;
 $use-calc: false;
 
-@mixin compose($font-size-degree: 0, $line-height-degree: 0) {
-  @include compose-font-size($font-size-degree);
-  @include compose-line-height($font-size-degree, $line-height-degree);
-}
-
-@mixin compose-font-size($font-size-degree: 0) {
-  // $font-size-degree: trunc($font-size-degree);
+@mixin compose($font-size-degree: 0, $line-height-degree: null) {
+  $font-size-degree: trunc($font-size-degree);
   $n: $scale-factor;
   $m: $scale-factor - $font-size-degree;
 
@@ -21,6 +16,10 @@ $use-calc: false;
     font-size: calc(#{$base-font-size} * #{$n} / #{$m});
   } @else {
     font-size: $base-font-size * $n / $m;
+  }
+
+  @if type-of($line-height-degree) == number {
+    @include compose-line-height($font-size-degree, $line-height-degree);
   }
 }
 
