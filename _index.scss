@@ -3,7 +3,6 @@
 $scale-factor: 8;
 $base-font-size: 1rem;
 $line-height-unit: 0.25rem;
-$base-line-height-multiple: 7;
 $use-calc: false;
 
 @mixin compose($font-size-degree: 0, $line-height-degree: 0) {
@@ -26,16 +25,21 @@ $use-calc: false;
 }
 
 @mixin compose-line-height($font-size-degree: 0, $line-height-degree: 0) {
-  // $font-size-degree: trunc($font-size-degree);
-  // $line-height-degree: trunc($line-height-degree);
-  $scale-factor: $scale-factor;
-  $base-line-height-multiple: $base-line-height-multiple;
-  $n: ($base-line-height-multiple + $line-height-degree) *
-    ($scale-factor - $font-size-degree);
+  $font-size-degree: trunc($font-size-degree);
+  $line-height-degree: trunc($line-height-degree);
+  $font-size: $base-font-size * $scale-factor / ($scale-factor - $font-size-degree);
+  $line-height-multiple: 1;
+
+  @while $line-height-unit * $line-height-multiple < $font-size {
+    $line-height-multiple: $line-height-multiple + 1;
+  }
+
+  $n: ($line-height-multiple + $line-height-degree) * ($scale-factor - $font-size-degree);
   $m: $scale-factor * ($base-font-size / $line-height-unit);
+
   @if $use-calc {
     line-height: calc(1em * #{$n} / #{$m});
   } @else {
-    line-height: $n / $m;
+    line-height: $line-height-unit * ($line-height-multiple + $line-height-degree) / $font-size;
   }
 }
