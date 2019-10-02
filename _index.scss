@@ -36,9 +36,11 @@ $use-calc: false;
   $n: ($line-height-multiple + $line-height-degree) * ($scale-factor - $font-size-degree);
   $m: $scale-factor * ($base-font-size / $line-height-unit);
 
-  @if $use-calc {
+  @if $n == $m {
+    line-height: 1;
+  }  @else if $use-calc {
     line-height: calc(1em * #{$n} / #{$m});
   } @else {
-    line-height: $line-height-unit * ($line-height-multiple + $line-height-degree) / $font-size;
+    line-height: $n / $m;
   }
 }
