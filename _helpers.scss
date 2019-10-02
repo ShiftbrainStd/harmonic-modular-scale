@@ -1,0 +1,3 @@
+@function trunc ($x) {
+  @return if($x < 0, ceil($x), floor($x));
+}
