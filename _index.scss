@@ -1,3 +1,5 @@
+// Harmonic Modular Scale
+
 @import "helpers";
 
 $hms-scale-factor: 8;
@@ -5,6 +7,19 @@ $hms-base-font-size: 1rem;
 $hms-line-height-unit: 0.25rem;
 $hms-use-calc: false;
 
+// Sets font-size in type scale based on harmonic progression
+//   and line-height based on vertical grid
+// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
+// @param {number} $line-height-degree [null] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+// @example
+//   h1 {
+//     @include hms-sizes(3, 2);
+//   }
+// @output
+//   h1 {
+//     font-size: calc(1rem * 8 / 5);
+//     line-height: calc(1em * 45 / 32);
+//   }
 @mixin hms-sizes($font-size-degree: 0, $line-height-degree: null) {
   $font-size-degree: trunc($font-size-degree);
   $fs-n: $hms-scale-factor;
@@ -23,6 +38,12 @@ $hms-use-calc: false;
   }
 }
 
+// Returns the line-height value that related to
+//   the font size in scale based on harmonic progression.
+// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
+// @param {number} $line-height-degree [0] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+// @param {boolean} $use-calc [$hms-use-calc] - If the value uses calc() function or not.
+// @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
 @function hms-sizes-lh ($font-size-degree: 0, $line-height-degree: 0, $use-calc: $hms-use-calc, $as-line-height: false) {
   $font-size-degree: trunc($font-size-degree);
   $line-height-degree: trunc($line-height-degree);
