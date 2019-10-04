@@ -27,13 +27,13 @@ $hms-use-calc: false;
   $font-size-degree: trunc($font-size-degree);
   $line-height-degree: trunc($line-height-degree);
   $font-size: $hms-base-font-size * $hms-scale-factor / ($hms-scale-factor - $font-size-degree);
-  $line-height-multiple: 1;
+  $base-line-height-multiple: 1;
 
-  @while $hms-line-height-unit * $line-height-multiple < $font-size {
-    $line-height-multiple: $line-height-multiple + 1;
+  @while $hms-line-height-unit * $base-line-height-multiple < $font-size {
+    $base-line-height-multiple: $base-line-height-multiple + 1;
   }
 
-  $n: ($line-height-multiple + $line-height-degree) * ($hms-scale-factor - $font-size-degree);
+  $n: ($base-line-height-multiple + $line-height-degree) * ($hms-scale-factor - $font-size-degree);
   $m: $hms-scale-factor * ($hms-base-font-size / $hms-line-height-unit);
 
   @if $as-line-height {
