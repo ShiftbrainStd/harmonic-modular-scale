@@ -7,15 +7,15 @@ $hms-use-calc: false;
 
 @mixin hms-sizes($font-size-degree: 0, $line-height-degree: null) {
   $font-size-degree: trunc($font-size-degree);
-  $n: $hms-scale-factor;
-  $m: $hms-scale-factor - $font-size-degree;
+  $fs-n: $hms-scale-factor;
+  $fs-d: $hms-scale-factor - $font-size-degree;
 
   @if $font-size-degree == 0 {
     font-size: $hms-base-font-size;
   } @else if $hms-use-calc {
-    font-size: calc(#{$hms-base-font-size} * #{$n} / #{$m});
+    font-size: calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d});
   } @else {
-    font-size: $hms-base-font-size * $n / $m;
+    font-size: $hms-base-font-size * $fs-n / $fs-d;
   }
 
   @if type-of($line-height-degree) == number {
@@ -26,29 +26,31 @@ $hms-use-calc: false;
 @function hms-sizes-lh ($font-size-degree: 0, $line-height-degree: 0, $use-calc: $hms-use-calc, $as-line-height: false) {
   $font-size-degree: trunc($font-size-degree);
   $line-height-degree: trunc($line-height-degree);
-  $font-size: $hms-base-font-size * $hms-scale-factor / ($hms-scale-factor - $font-size-degree);
+  $fs-n: $hms-scale-factor;
+  $fs-d: $hms-scale-factor - $font-size-degree;
+  $font-size: $hms-base-font-size * $fs-n / $fs-d;
   $base-line-height-multiple: 1;
 
   @while $hms-line-height-unit * $base-line-height-multiple < $font-size {
     $base-line-height-multiple: $base-line-height-multiple + 1;
   }
 
-  $n: ($base-line-height-multiple + $line-height-degree) * ($hms-scale-factor - $font-size-degree);
-  $m: $hms-scale-factor * ($hms-base-font-size / $hms-line-height-unit);
+  $lh-n: ($base-line-height-multiple + $line-height-degree) * $fs-d;
+  $lh-d: ($hms-base-font-size / $hms-line-height-unit) * $fs-n;
 
   @if $as-line-height {
-    @if $n == $m {
+    @if $lh-n == $lh-d {
       @return 1;
     } @else if $use-calc {
-      @return calc(1em * #{$n} / #{$m});
+      @return calc(1em * #{$lh-n} / #{$lh-d});
     } @else {
-      @return $n / $m;
+      @return $lh-n / $lh-d;
     }
   } @else {
     @if $use-calc {
-      @return calc(#{$hms-base-font-size} * #{$hms-scale-factor} / #{$hms-scale-factor - $font-size-degree} * #{$n} / #{$m});
+      @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d});
     } @else {
-      @return $font-size * $n / $m;
+      @return $font-size * $lh-n / $lh-d;
     }
   }
 }
