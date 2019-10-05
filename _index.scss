@@ -68,8 +68,16 @@ $hms-use-calc: false;
       @return $lh-n / $lh-d;
     }
   } @else {
-    @if $use-calc {
-      @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d});
+    @if $lh-n == $lh-d and $fs-n == $fs-d {
+      @return $hms-base-font-size;
+    } @else if $use-calc {
+      @if $lh-n == $lh-d {
+        @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d});
+      } @else if $fs-n == $fs-d {
+        @return calc(#{$hms-base-font-size} * #{$lh-n} / #{$lh-d});
+      } @else {
+        @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d});
+      }
     } @else {
       @return $font-size * $lh-n / $lh-d;
     }
