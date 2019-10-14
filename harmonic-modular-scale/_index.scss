@@ -39,7 +39,11 @@ $hms-use-calc: false;
   }
 
   @if type-of($line-height-degree) == number {
-    line-height: hms-sizes-lh($font-size-degree, $line-height-degree, $hms-use-calc, $as-line-height: true);
+    line-height: hms-sizes-lh(
+      $font-size-degree: $font-size-degree,
+      $line-height-degree: $line-height-degree,
+      $as-line-height: true
+    );
   }
 }
 
@@ -47,11 +51,20 @@ $hms-use-calc: false;
 //   the font size in scale based on harmonic progression.
 // @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
 // @param {number} $line-height-degree [0] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+// @param {number} $lines [1] - The number to multiply the line height.
 // @param {boolean} $use-calc [$hms-use-calc] - If the value uses calc() function or not.
 // @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
-@function hms-sizes-lh ($font-size-degree: 0, $line-height-degree: 0, $use-calc: $hms-use-calc, $as-line-height: false) {
+@function hms-sizes-lh (
+  $font-size-degree: 0,
+  $line-height-degree: 0,
+  $lines: 1,
+  $use-calc: $hms-use-calc,
+  $as-line-height: false
+) {
+
   $font-size-degree: trunc($font-size-degree);
   $line-height-degree: trunc($line-height-degree);
+  $lines: trunc($lines);
   $fs-n: $hms-scale-factor;
   $fs-d: $hms-scale-factor - $font-size-degree;
   $font-size: $hms-base-font-size * $fs-n / $fs-d;
@@ -79,18 +92,30 @@ $hms-use-calc: false;
   @if $use-calc {
     @if $lh-n == $lh-d {
       @if $fs-n == $fs-d {
-        @return $hms-base-font-size;
+        @return $hms-base-font-size * $lines;
+      }
+
+      @if $lines != 1 {
+        @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d} * #{$lines});
       }
 
       @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d});
     }
 
     @if $fs-n == $fs-d {
+      @if $lines != 1 {
+        @return calc(#{$hms-base-font-size} * #{$lh-n} / #{$lh-d} * #{$lines});
+      }
+
       @return calc(#{$hms-base-font-size} * #{$lh-n} / #{$lh-d});
+    }
+
+    @if $lines != 1 {
+      @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d} * #{$lines});
     }
 
     @return calc(#{$hms-base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d});
   }
 
-  @return $font-size * $lh-n / $lh-d;
+  @return $font-size * $lh-n / $lh-d * $lines;
 }
