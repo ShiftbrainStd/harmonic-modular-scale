@@ -21,6 +21,11 @@ $hms-use-calc: false;
 //     line-height: calc(1em * 45 / 32);
 //   }
 @mixin hms-sizes($font-size-degree: 0, $line-height-degree: null) {
+  @if type-of($font-size-degree) == list {
+    $line-height-degree: nth($font-size-degree, 2);
+    $font-size-degree: nth($font-size-degree, 1);
+  }
+
   $font-size-degree: trunc($font-size-degree);
   $fs-n: $hms-scale-factor;
   $fs-d: $hms-scale-factor - $font-size-degree;
