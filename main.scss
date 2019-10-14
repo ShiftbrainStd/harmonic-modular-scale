@@ -1,0 +1,12 @@
+@import "harmonic-modular-scale";
+
+$theme-sizes-body: (0, 3);
+$theme-sizes-h1: (3, 0);
+
+body {
+  @include hms-sizes($theme-sizes-body);
+}
+
+h1 {
+  @include hms-sizes($theme-sizes-h1);
+}
