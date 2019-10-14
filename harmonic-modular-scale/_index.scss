@@ -52,13 +52,11 @@ $hms-use-calc: false;
 // @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
 // @param {number} $line-height-degree [0] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
 // @param {number} $lines [1] - The number to multiply the line height.
-// @param {boolean} $use-calc [$hms-use-calc] - If the value uses calc() function or not.
 // @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
 @function hms-sizes-lh (
   $font-size-degree: 0,
   $line-height-degree: 0,
   $lines: 1,
-  $use-calc: $hms-use-calc,
   $as-line-height: false
 ) {
 
@@ -82,14 +80,14 @@ $hms-use-calc: false;
       @return 1;
     }
 
-    @if $use-calc {
+    @if $hms-use-calc {
       @return calc(1em * #{$lh-n} / #{$lh-d});
     }
 
     @return $lh-n / $lh-d;
   }
 
-  @if $use-calc {
+  @if $hms-use-calc {
     @if $lh-n == $lh-d {
       @if $fs-n == $fs-d {
         @return $hms-base-font-size * $lines;
