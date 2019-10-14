@@ -9,4 +9,11 @@ body {
 
 h1 {
   @include hms-sizes($theme-sizes-h1);
+  margin-top: hms-sizes-lh($theme-sizes-body, 3);
+  margin-bottom: hms-sizes-lh($theme-sizes-body, 2);
+}
+
+p {
+  margin-top: hms-sizes-lh($theme-sizes-body);
+  margin-bottom: hms-sizes-lh($theme-sizes-body);
 }

@@ -59,6 +59,18 @@ $hms-use-calc: false;
   $lines: 1,
   $as-line-height: false
 ) {
+  @if type-of($font-size-degree) == list {
+    @if length($font-size-degree) == 3 {
+      $lines: nth($font-size-degree, 3);
+    }
+
+    @if length($font-size-degree) == 2 and $line-height-degree != 0 {
+      $lines: $line-height-degree;
+    }
+
+    $line-height-degree: nth($font-size-degree, 2);
+    $font-size-degree: nth($font-size-degree, 1);
+  }
 
   $font-size-degree: trunc($font-size-degree);
   $line-height-degree: trunc($line-height-degree);
