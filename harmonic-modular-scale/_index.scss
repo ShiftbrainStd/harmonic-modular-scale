@@ -20,7 +20,7 @@ $hms-use-calc: false;
 //     font-size: calc(1rem * 8 / 5);
 //     line-height: calc(1em * 45 / 32);
 //   }
-@mixin hms-sizes($font-size-degree: 0, $line-height-degree: null) {
+@mixin hms-sizes($font-size-degree, $line-height-degree: null) {
   @if type-of($font-size-degree) == list {
     $line-height-degree: nth($font-size-degree, 2);
     $font-size-degree: nth($font-size-degree, 1);
@@ -54,8 +54,8 @@ $hms-use-calc: false;
 // @param {number} $lines [1] - The number to multiply the line height.
 // @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
 @function hms-sizes-lh (
-  $font-size-degree: 0,
-  $line-height-degree: 0,
+  $font-size-degree,
+  $line-height-degree: null,
   $lines: 1,
   $as-line-height: false
 ) {
@@ -64,7 +64,7 @@ $hms-use-calc: false;
       $lines: nth($font-size-degree, 3);
     }
 
-    @if length($font-size-degree) == 2 and $line-height-degree != 0 {
+    @if length($font-size-degree) == 2 and $line-height-degree {
       $lines: $line-height-degree;
     }
 
