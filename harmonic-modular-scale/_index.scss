@@ -2,10 +2,10 @@
 
 @import "helpers";
 
-$hms-scale-factor: 8;
-$hms-base-font-size: 1rem;
-$hms-line-height-unit: 0.25rem;
-$hms-use-calc: true;
+$hms-scale-factor: 8 !default;
+$hms-base-font-size: 1rem !default;
+$hms-line-height-unit: 0.25rem !default;
+$hms-use-calc: true !default;
 
 // Sets font-size in type scale based on harmonic progression
 //   and line-height based on vertical grid
