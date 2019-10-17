@@ -1,19 +1,19 @@
-@import "harmonic-modular-scale";
+@use "harmonic-modular-scale" as scale;
 
 $theme-sizes-body: (0, 3);
 $theme-sizes-h1: (3, 0);
 
 body {
-  @include hms-sizes($theme-sizes-body);
+  @include scale.sizes($theme-sizes-body);
 }
 
 h1 {
-  @include hms-sizes($theme-sizes-h1);
-  margin-top: hms-sizes-lh($theme-sizes-body, 3);
-  margin-bottom: hms-sizes-lh(0, 3, 2);
+  @include scale.sizes($theme-sizes-h1);
+  margin-top: scale.sizes-lh($theme-sizes-body, 3);
+  margin-bottom: scale.sizes-lh(0, 3, 2);
 }
 
 p {
-  margin-top: hms-sizes-lh($theme-sizes-body);
-  margin-bottom: hms-sizes-lh($theme-sizes-body);
+  margin-top: scale.sizes-lh($theme-sizes-body);
+  margin-bottom: scale.sizes-lh($theme-sizes-body);
 }
