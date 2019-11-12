@@ -1,4 +1,4 @@
-@use "harmonic-modular-scale" as scale;
+@use "../index" as scale;
 
 $theme-sizes-body: (0, 3);
 $theme-sizes-h1: (3, 0);

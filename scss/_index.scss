@@ -9,19 +9,20 @@ $base-font-size: 1rem !default;
 $line-height-unit: 0.25rem !default;
 $use-calc: true !default;
 
-// Sets font-size in type scale based on harmonic progression
-//   and line-height based on vertical grid
-// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
-// @param {number} $line-height-degree [null] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
-// @example
-//   h1 {
-//     @include sizes(3, 2);
-//   }
-// @output
-//   h1 {
-//     font-size: calc(1rem * 8 / 5);
-//     line-height: calc(1em * 45 / 32);
-//   }
+/// Sets font-size in type scale based on harmonic progression
+///   and line-height based on vertical grid
+///
+/// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
+/// @param {number} $line-height-degree [null] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+/// @example
+///   h1 {
+///     @include sizes(3, 2);
+///   }
+/// @output
+///   h1 {
+///     font-size: calc(1rem * 8 / 5);
+///     line-height: calc(1em * 45 / 32);
+///   }
 @mixin sizes($font-size-degree, $line-height-degree: null) {
   @if meta.type-of($font-size-degree) == list {
     $line-height-degree: list.nth($font-size-degree, 2);
@@ -49,13 +50,14 @@ $use-calc: true !default;
   }
 }
 
-// Returns the line-height value that related to
-//   the font size in scale based on harmonic progression.
-// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
-// @param {number} $line-height-degree [0] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
-// @param {number} $lines [1] - The number to multiply the line height.
-// @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
-@function sizes-lh (
+/// Returns the line-height value related
+/// to the font size in scale based on harmonic progression.
+///
+/// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
+/// @param {number} $line-height-degree [0] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+/// @param {number} $lines [1] - The number to multiply the line height.
+/// @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
+@function sizes-lh(
   $font-size-degree,
   $line-height-degree: null,
   $lines: 1,
@@ -123,10 +125,14 @@ $use-calc: true !default;
     }
 
     @if $lines != 1 {
-      @return calc(#{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d} * #{$lines});
+      @return calc(
+        #{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d} * #{$lines}
+      );
     }
 
-    @return calc(#{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d});
+    @return calc(
+      #{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d}
+    );
   }
 
   @return $font-size * $lh-n / $lh-d * $lines;

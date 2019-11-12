@@ -1,5 +1,5 @@
 @use "sass:math";
 
-@function trunc ($x) {
+@function trunc($x) {
   @return if($x < 0, math.ceil($x), math.floor($x));
 }
