@@ -149,7 +149,7 @@ $use-calc: true !default;
   $sizes: get-sizes($font-size-degree, $line-height-degree);
 
   font-size: list.nth($sizes, 1);
-  @if list.length(2) {
+  @if list.length($sizes) == 2 {
     line-height: list.nth($sizes, 2);
   }
 }
