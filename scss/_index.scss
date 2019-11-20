@@ -9,21 +9,7 @@ $base-font-size: 1rem !default;
 $line-height-unit: 0.25rem !default;
 $use-calc: true !default;
 
-/// Sets font-size in type scale based on harmonic progression
-///   and line-height based on vertical grid
-///
-/// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
-/// @param {number} $line-height-degree [null] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
-/// @example
-///   h1 {
-///     @include sizes(3, 2);
-///   }
-/// @output
-///   h1 {
-///     font-size: calc(1rem * 8 / 5);
-///     line-height: calc(1em * 45 / 32);
-///   }
-@mixin sizes($font-size-degree, $line-height-degree: null) {
+@function get-sizes($font-size-degree, $line-height-degree: null) {
   @if meta.type-of($font-size-degree) == list {
     $line-height-degree: list.nth($font-size-degree, 2);
     $font-size-degree: list.nth($font-size-degree, 1);
@@ -34,20 +20,27 @@ $use-calc: true !default;
   $fs-d: $scale-factor - $font-size-degree;
 
   @if $font-size-degree == 0 {
-    font-size: $base-font-size;
+    $font-size: $base-font-size;
   } @else if $use-calc {
-    font-size: calc(#{$base-font-size} * #{$fs-n} / #{$fs-d});
+    $font-size: calc(#{$base-font-size} * #{$fs-n} / #{$fs-d});
   } @else {
-    font-size: $base-font-size * $fs-n / $fs-d;
+    $font-size: $base-font-size * $fs-n / $fs-d;
   }
 
+  $sizes: ($font-size);
+
   @if meta.type-of($line-height-degree) == number {
-    line-height: sizes-lh(
-      $font-size-degree: $font-size-degree,
-      $line-height-degree: $line-height-degree,
-      $as-line-height: true
+    $sizes: list.append(
+      $sizes,
+      sizes-lh(
+        $font-size-degree: $font-size-degree,
+        $line-height-degree: $line-height-degree,
+        $as-line-height: true,
+      )
     );
   }
+
+  @return $sizes;
 }
 
 /// Returns the line-height value related
@@ -136,4 +129,27 @@ $use-calc: true !default;
   }
 
   @return $font-size * $lh-n / $lh-d * $lines;
+}
+
+/// Sets font-size in type scale based on harmonic progression
+///   and line-height based on vertical grid
+///
+/// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
+/// @param {number} $line-height-degree [null] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+/// @example
+///   h1 {
+///     @include sizes(3, 2);
+///   }
+/// @output
+///   h1 {
+///     font-size: calc(1rem * 8 / 5);
+///     line-height: calc(1em * 45 / 32);
+///   }
+@mixin sizes($font-size-degree, $line-height-degree: null) {
+  $sizes: get-sizes($font-size-degree, $line-height-degree);
+
+  font-size: list.nth($sizes, 1);
+  @if list.length(2) {
+    line-height: list.nth($sizes, 2);
+  }
 }
