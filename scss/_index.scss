@@ -19,6 +19,8 @@ $use-calc: true !default;
   $fs-n: $scale-factor;
   $fs-d: $scale-factor - $font-size-degree;
 
+  $font-size: 0;
+
   @if $font-size-degree == 0 {
     $font-size: $base-font-size;
   } @else if $use-calc {
