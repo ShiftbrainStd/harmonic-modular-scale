@@ -48,7 +48,7 @@ Import the module in your Sass file:
 
 This module exposes a main function and a mixin:
 
-- `get-sizes`: a function returning a list containing a font-size and an optional lin-height.
+- `get-sizes`: a function returning a list containing a font-size and an optional line-height.
 - `sizes`: a mixin outputting a font-size and line-height. Uses `get-sizes` internally.
 
 ### `get-sizes`
@@ -137,7 +137,7 @@ You can use the `get-sizes` function as the `polyrhythm-typography`'s type scale
 );
 ```
 
-See the `polyrhythm-typography` [documentation](https://github.com/devjam/polyrhythm-typography/) for more details.
+See the `polyrhythm-typography` [documentation](https://github.com/devjam/polyrhythm-typography/#use-a-custom-type-scaler-calculator) for more details.
 
 ## Run demo
 
