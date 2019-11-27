@@ -20,8 +20,9 @@ See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-pr
 
 - [Install](#install)
 - [Usage](#usage)
-  - [`get-sizes`](#get-sizes)
-  - [`sizes`](#sizes)
+  - [`get-sizes` function](#get-sizes)
+  - [`get-line-height` function](#get-line-height)
+  - [`sizes` mixub](#sizes)
   - [Setup](#setup)
   - [Integration with `polyrhythm-typography`](#integration-with-polyrhythm-typography)
 - [Run demo](#run-demo)
@@ -51,7 +52,7 @@ This module exposes a main function and a mixin:
 - `get-sizes`: a function returning a list containing a font-size and an optional line-height.
 - `sizes`: a mixin outputting a font-size and line-height. Uses `get-sizes` internally.
 
-### `get-sizes`
+### `get-sizes` function
 
 The `get-sizes` function accepts the following arguments:
 
@@ -80,9 +81,39 @@ $sizes: hms.get-sizes($list);
 
 **Note:** when `$line-height-degree` is `null` the returned list will contain only the `font-size` value.
 
-### `sizes`
+### `get-line-height` function
 
-The `sizes` accepts the same arguments as [`get-sizes`](#get-sizes) and outputs `font-size` and `line-height` rules.
+The `get-line-height` function accepts the following arguments:
+
+| argument              | type   | default | description                                                                                                                 |
+| --------------------- | ------ | ------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `$font-size-degree`   | number | 0       | An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.       |
+| `$line-height-degree` | number | null    | The increments of line height relative to the minimum height that can contain the current font size. It must be an integer. |
+| `$lines` | number | 1    | The number to multiply the line height for. |
+
+It will returns `line-hieght` value related to the `$base-font-size`. It is helpful when you need to set sizes based on typographic scale.
+
+Input:
+
+```scss
+.my-selector {
+  margin-top: hms.get-line-height(0, 3, 2);
+  margin-bottom: hms.get-line-height(0, 3);
+}
+```
+
+Output:
+
+```scss
+.my-selector {
+  margin-top: calc(1rem * 56 / 32 * 2);
+  margin-bottom: calc(1rem * 56 / 32);
+}
+```
+
+### `sizes` mixin
+
+The `sizes` mixin accepts the same arguments as [`get-sizes`](#get-sizes) and outputs `font-size` and `line-height` rules.
 
 Input:
 
