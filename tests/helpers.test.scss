@@ -1,0 +1,13 @@
+@use "true" as *;
+@use "../scss/helpers" as h;
+
+@include describe("Helpers") {
+  @include describe("@function trunc") {
+    @include it("rounds up negative values") {
+      @include assert-equal(h.trunc(-1.5), -1);
+    }
+    @include it("rounds down positive values") {
+      @include assert-equal(h.trunc(1.5), 1);
+    }
+  }
+}

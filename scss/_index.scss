@@ -9,12 +9,48 @@ $base-font-size: 1rem !default;
 $line-height-unit: 0.25rem !default;
 $use-calc: true !default;
 
+/// Returns a list with font-size and line-height from typographic scale values based on harmonic progression
+///
+/// @param {number} $font-size-degree [0] - An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.
+/// @param {number} $line-height-degree [null] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
+/// @returns {list}
+/// @example
+///   $sizes: get-sizes(3, 2);
+/// @output
+///   $sizes === (calc(1rem * 8 / 5), calc(1em * 45 / 32));
+///
 @function get-sizes($font-size-degree, $line-height-degree: null) {
   @if meta.type-of($font-size-degree) == list {
     $line-height-degree: list.nth($font-size-degree, 2);
     $font-size-degree: list.nth($font-size-degree, 1);
   }
 
+  $sizes: (get-font-size($font-size-degree));
+
+  @if meta.type-of($line-height-degree) == number {
+    $sizes: list.append(
+      $sizes,
+      get-line-height(
+        $font-size-degree: $font-size-degree,
+        $line-height-degree: $line-height-degree,
+        $as-line-height: true,
+      )
+    );
+  }
+
+  @return $sizes;
+}
+
+/// Returns a font-size from typographic scale values based on harmonic progression
+///
+/// @param {number} $font-size-degree [0] - An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.
+/// @returns {number}
+/// @example
+///   $font-size: get-font-size(3);
+/// @output
+///   $font-size === calc(1rem * 8 / 5);
+///
+@function get-font-size($font-size-degree) {
   $font-size-degree: helpers.trunc($font-size-degree);
   $fs-n: $scale-factor;
   $fs-d: $scale-factor - $font-size-degree;
@@ -29,30 +65,18 @@ $use-calc: true !default;
     $font-size: $base-font-size * $fs-n / $fs-d;
   }
 
-  $sizes: ($font-size);
-
-  @if meta.type-of($line-height-degree) == number {
-    $sizes: list.append(
-      $sizes,
-      sizes-lh(
-        $font-size-degree: $font-size-degree,
-        $line-height-degree: $line-height-degree,
-        $as-line-height: true,
-      )
-    );
-  }
-
-  @return $sizes;
+  @return $font-size;
 }
 
-/// Returns the line-height value related
-/// to the font size in scale based on harmonic progression.
+/// Returns a line-height value based on a font-size typographic scale value
 ///
-/// @param {number} $font-size-degree [0] - The position of font size in scale relative to the base font size. It must be an integer.
+/// @param {number} $font-size-degree [0] - An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.
 /// @param {number} $line-height-degree [0] - The increments of line height relative to the minimum height that can contain the current font size. It must be an integer.
-/// @param {number} $lines [1] - The number to multiply the line height.
-/// @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If not, returns the value relative to the root font size.
-@function sizes-lh(
+/// @param {number} $lines [1] - The number to multiply the line height for.
+/// @param {boolean} $as-line-height [false] - If true, returns the value relative to the current font-size. If false, returns the value relative to the root font size.
+/// @returns {string|number}
+///
+@function get-line-height(
   $font-size-degree,
   $line-height-degree: null,
   $lines: 1,
@@ -69,6 +93,10 @@ $use-calc: true !default;
 
     $line-height-degree: list.nth($font-size-degree, 2);
     $font-size-degree: list.nth($font-size-degree, 1);
+  }
+
+  @if meta.type-of($line-height-degree) != number {
+    @error "$line-height-degree must be a number. Received: #{$line-height-degree}";
   }
 
   $font-size-degree: helpers.trunc($font-size-degree);
@@ -120,14 +148,12 @@ $use-calc: true !default;
     }
 
     @if $lines != 1 {
-      @return calc(
-        #{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d} * #{$lines}
-      );
+      // prettier-ignore
+      @return calc(#{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d} * #{$lines});
     }
 
-    @return calc(
-      #{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d}
-    );
+    // prettier-ignore
+    @return calc(#{$base-font-size} * #{$fs-n} / #{$fs-d} * #{$lh-n} / #{$lh-d});
   }
 
   @return $font-size * $lh-n / $lh-d * $lines;

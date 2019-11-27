@@ -1,7 +1,0 @@
-@use "true" as *;
-
-@include describe("Media Query Module") {
-  @include it("returns true") {
-    @include assert-equal(true, true);
-  }
-}
