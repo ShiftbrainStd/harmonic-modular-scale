@@ -9,11 +9,11 @@ body {
 
 h1 {
   @include scale.sizes($theme-sizes-h1);
-  margin-top: scale.sizes-lh($theme-sizes-body, 3);
-  margin-bottom: scale.sizes-lh(0, 3, 2);
+  margin-top: scale.get-line-height($theme-sizes-body, 3);
+  margin-bottom: scale.get-line-height(0, 3, 2);
 }
 
 p {
-  margin-top: scale.sizes-lh($theme-sizes-body);
-  margin-bottom: scale.sizes-lh($theme-sizes-body);
+  margin-top: scale.get-line-height($theme-sizes-body);
+  margin-bottom: scale.get-line-height($theme-sizes-body);
 }
