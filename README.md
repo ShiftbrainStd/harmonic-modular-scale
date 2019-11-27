@@ -90,6 +90,7 @@ The `get-line-height` function accepts the following arguments:
 | `$font-size-degree`   | number | 0       | An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.       |
 | `$line-height-degree` | number | null    | The increments of line height relative to the minimum height that can contain the current font size. It must be an integer. |
 | `$lines` | number | 1    | The number to multiply the line height for. |
+| `$as-line-height` | boolean | false | If true, returns the value relative to the current font-size. If false, returns the value relative to the root font size. |
 
 It will returns `line-hieght` value related to the `$base-font-size`. It is helpful when you need to set sizes based on typographic scale.
 
