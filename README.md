@@ -20,9 +20,9 @@ See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-pr
 
 - [Install](#install)
 - [Usage](#usage)
-  - [`get-sizes` function](#get-sizes)
-  - [`get-line-height` function](#get-line-height)
-  - [`sizes` mixin](#sizes)
+  - [`get-sizes` function](#get-sizes-function)
+  - [`get-line-height` function](#get-line-height-function)
+  - [`sizes` mixin](#sizes-mixin)
   - [Setup](#setup)
   - [Integration with `polyrhythm-typography`](#integration-with-polyrhythm-typography)
 - [Run demo](#run-demo)
