@@ -22,7 +22,7 @@ See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-pr
 - [Usage](#usage)
   - [`get-sizes` function](#get-sizes)
   - [`get-line-height` function](#get-line-height)
-  - [`sizes` mixub](#sizes)
+  - [`sizes` mixin](#sizes)
   - [Setup](#setup)
   - [Integration with `polyrhythm-typography`](#integration-with-polyrhythm-typography)
 - [Run demo](#run-demo)
