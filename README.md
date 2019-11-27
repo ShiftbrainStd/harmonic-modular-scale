@@ -12,7 +12,7 @@
 
 > Harmonic Modular Scale Typography
 
-A Sass module to manage your project's typographic scale using an harmonic progression.
+A Sass module to manage your project’s typographic scale using an harmonic progression.
 
 See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-proportions-in-type-sizes) for details (Japanese).
 
@@ -125,7 +125,7 @@ Example:
 
 ### Integration with `polyrhythm-typography`
 
-You can use the `get-sizes` function as the `polyrhythm-typography`'s type scaler:
+You can use the `get-sizes` function as the `polyrhythm-typography`’s type scaler:
 
 ```scss
 // main.scss
