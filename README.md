@@ -12,7 +12,7 @@
 
 > Harmonic Modular Scale Typography
 
-A Sass module to manage your project’s typographic scale using an harmonic progression.
+A Sass module to manage your project’s typographic scale using an [harmonic progression](https://en.wikipedia.org/wiki/Harmonic_progression_(mathematics)).
 
 See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-proportions-in-type-sizes) for details (Japanese).
 
