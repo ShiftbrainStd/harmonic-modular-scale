@@ -1,16 +1,65 @@
 {
+  "name": "harmonic-modular-scale",
+  "description": "Polyrhythm Modular Scale",
+  "author": "Shiftbrain Inc. (https://www.shiftbrain.com/)",
+  "private": true,
+  "version": "1.0.0",
+  "main": "_index.scss",
+  "files": [
+    "_index.scss",
+    "scss/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devjam/harmomic-modular-scale.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devjam/harmomic-modular-scale/issues"
+  },
+  "homepage": "https://github.com/devjam/harmomic-modular-scale#readme",
   "scripts": {
     "sass:watch": "chokidar '**/*.scss' -c 'npm run sass:build' --initial",
-    "sass:build": "sass main.scss main.css",
-    "serve": "browser-sync start -s -f '*.html' '*.css'",
+    "sass:build": "sass demo/main.scss demo/main.css",
+    "serve": "browser-sync start -c ./.config/browser-sync.js",
     "start": "npm-run-all -p sass:watch serve",
-    "build": "npm run sass:build"
+    "build": "npm run sass:build",
+    "lint": "stylelint **/*.scss",
+    "test": "jest"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "chokidar-cli": "^2.0.0",
+    "chokidar-cli": "^2.1.0",
+    "fast-glob": "^3.1.0",
+    "jest": "^24.9.0",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.23.0"
+    "sass": "^1.23.2",
+    "sass-true": "^5.0.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-recommended-scss": "^4.0.0",
+    "stylelint-scss": "^3.12.0"
   },
-  "private": true
+  "stylelint": {
+    "extends": "stylelint-config-recommended-scss",
+    "rules": {
+      "string-quotes": "double"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": false,
+    "overrides": [
+      {
+        "files": "*.js",
+        "options": {
+          "singleQuote": true
+        }
+      }
+    ]
+  }
 }

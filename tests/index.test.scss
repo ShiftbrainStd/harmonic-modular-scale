@@ -1,0 +1,91 @@
+@use "sass:list";
+@use "true" as *;
+@use "../scss/index" as scale;
+
+@include describe("Main") {
+  @include describe("@function get-line-height") {
+    @include it("returns a line-height value") {
+      scale.$use-calc: true;
+      @include assert-equal(
+        scale.get-line-height(1, 2),
+        calc(1rem * 8 / 7 * 49 / 32)
+      );
+
+      scale.$use-calc: false;
+      @include assert-equal(
+        scale.get-line-height(1, 2),
+        (1rem * 8 / 7 * 49 / 32)
+      );
+    }
+    @include it("returns a line-height relative to the font size") {
+      scale.$use-calc: true;
+      @include assert-equal(
+        scale.get-line-height(1, 2, $as-line-height: true),
+        calc(1em * 49 / 32)
+      );
+
+      scale.$use-calc: false;
+      @include assert-equal(
+        scale.get-line-height(1, 2, $as-line-height: true),
+        (1 * 49 / 32)
+      );
+    }
+    @include it("returns a line-height value spanning multiple line") {
+      scale.$use-calc: true;
+      @include assert-equal(
+        scale.get-line-height(1, 2, 2),
+        calc(1rem * 8 / 7 * 49 / 32 * 2)
+      );
+
+      scale.$use-calc: false;
+      @include assert-equal(
+        scale.get-line-height(1, 2, 2),
+        (1rem * 8 / 7 * 49 / 32 * 2)
+      );
+    }
+
+    @include it("accepts arguments as a single list") {
+      scale.$use-calc: true;
+      $list: (1, 2, 2);
+      @include assert-equal(
+        scale.get-line-height($list),
+        calc(1rem * 8 / 7 * 49 / 32 * 2)
+      );
+    }
+  }
+
+  @include describe("@function get-font-size") {
+    scale.$use-calc: true;
+    @include it("returns a get-font-size value") {
+      @include assert-equal(scale.get-font-size(2), calc(1rem * 8 / 6));
+    }
+    @include it("returns a get-font-size value without calc") {
+      scale.$use-calc: false;
+      @include assert-equal(scale.get-font-size(2), (1rem * 8 / 6));
+    }
+  }
+
+  @include describe("@function get-sizes") {
+    scale.$use-calc: true;
+    @include it("calls get-line-height and get-font-size") {
+      $fs: scale.get-font-size(1);
+      $lh: scale.get-line-height(1, 2, $as-line-height: true);
+      @include assert-equal(scale.get-sizes(1, 2), ($fs $lh));
+    }
+  }
+
+  @include describe("@mixin sizes") {
+    @include it("outputs the result from get-sizes") {
+      @include assert {
+        @include output {
+          @include scale.sizes(1, 2);
+        }
+        @include expect {
+          $sizes: scale.get-sizes(1, 2);
+          font-size: list.nth($sizes, 1);
+          line-height: list.nth($sizes, 2);
+        }
+      }
+    }
+  }
+}

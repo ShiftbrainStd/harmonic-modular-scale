@@ -1,0 +1,19 @@
+@use "../index" as scale;
+
+$theme-sizes-body: (0, 3);
+$theme-sizes-h1: (3, 0);
+
+body {
+  @include scale.sizes($theme-sizes-body);
+}
+
+h1 {
+  @include scale.sizes($theme-sizes-h1);
+  margin-top: scale.get-line-height($theme-sizes-body, 3);
+  margin-bottom: scale.get-line-height(0, 3, 2);
+}
+
+p {
+  margin-top: scale.get-line-height($theme-sizes-body);
+  margin-bottom: scale.get-line-height($theme-sizes-body);
+}
