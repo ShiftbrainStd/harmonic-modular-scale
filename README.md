@@ -1,4 +1,4 @@
-# harmonic-modular-scale
+# Harmonic Modular Scale
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
@@ -36,7 +36,7 @@ See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-pr
 ## Install
 
 ```sh
-npm install @shiftbrainstd/harmonic-modular-scale -S
+npm install @shiftbrainstd/harmonic-modular-scale
 ```
 
 ## Usage
@@ -169,7 +169,7 @@ You can use the `get-sizes` function as the `polyrhythm-typography`’s type sca
 );
 ```
 
-See the `polyrhythm-typography` [documentation](https://github.com/devjam/polyrhythm-typography/#use-a-custom-type-scaler-calculator) for more details.
+See the `polyrhythm-typography` [documentation](https://github.com/ShiftbrainStd/polyrhythm-typography#use-a-custom-type-scaler-calculator) for more details.
 
 ## Run demo
 
@@ -185,10 +185,10 @@ npm run test
 
 ## Author
 
-👤 **Shiftbrain Inc. (https://www.shiftbrain.com/)**
+👤 **Shiftbrain Standard Design Unit (https://standard.shiftbrain.com/)**
 
-- Twitter: [@shiftbrain](https://twitter.com/shiftbrain)
-- Github: [@devjam](https://github.com/devjam)
+- Twitter: [@ShiftbrainStd](https://twitter.com/ShiftbrainStd)
+- Github: [@ShiftbrainStd](https://github.com/ShiftbrainStd)
 
 ## 🤝 Contributing
 
@@ -196,7 +196,7 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 ## 📝 License
 
-Copyright © 2019 [Shiftbrain Inc. (https://www.shiftbrain.com/)](https://github.com/).
+Copyright © 2019 [Shiftbrain Standard Design Unit](https://standard.shiftbrain.com/).<br />This project is MIT licensed.
 
 ---
 
