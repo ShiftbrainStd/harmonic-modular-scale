@@ -36,7 +36,7 @@ See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-pr
 ## Install
 
 ```sh
-npm install devjam/harmonic-modular-scale#master -S
+npm install @shiftbrainstd/harmonic-modular-scale -S
 ```
 
 ## Usage
