@@ -1,7 +1,7 @@
 {
   "name": "@shiftbrainstd/harmonic-modular-scale",
-  "description": "Polyrhythm Modular Scale",
-  "author": "Shiftbrain Inc. (https://www.shiftbrain.com/)",
+  "description": "Harmonic Modular Scale Typography",
+  "author": "Shiftbrain Standard Design Unit (https://standard.shiftbrain.com/)",
   "version": "1.0.0",
   "main": "_index.scss",
   "files": [
