@@ -4,9 +4,13 @@
   "author": "Shiftbrain Inc. (https://www.shiftbrain.com/)",
   "private": true,
   "version": "1.0.0",
-  "main": "_index.scss",
+  "main": "dist/index.js",
+  "module": "dist/harmomic-modular-scale.esm.js",
+  "unpkg": "dist/harmomic-modular-scale.umd.production.min.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "_index.scss",
+    "dist",
     "scss/**/*"
   ],
   "repository": {
@@ -19,34 +23,76 @@
   },
   "homepage": "https://github.com/devjam/harmomic-modular-scale#readme",
   "scripts": {
+    "prepublishOnly": "run-s lint test build",
     "sass:watch": "chokidar '**/*.scss' -c 'npm run sass:build' --initial",
-    "sass:build": "sass demo/main.scss demo/main.css",
+    "sass:build": "sass demo/main.scss:demo/main.css",
+    "sass:lint": "stylelint \"**/*.scss\"",
+    "ts:lint": "eslint \"src/**/*.ts\"",
+    "ts:watch": "tsdx watch --entry demo/index.ts --format umd",
+    "ts:build": "tsdx build --format cjs,esm,umd --entry src/index.ts",
     "serve": "browser-sync start -c ./.config/browser-sync.js",
-    "start": "npm-run-all -p sass:watch serve",
-    "build": "npm run sass:build",
-    "lint": "stylelint **/*.scss",
+    "start": "run-p sass:watch ts:watch serve",
+    "build": "run-s sass:build ts:build",
+    "lint": "run-s sass:lint ts:lint",
     "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
     "browser-sync": "^2.26.7",
     "chokidar-cli": "^2.1.0",
-    "fast-glob": "^3.1.0",
+    "csstype": "^2.6.7",
+    "emotion": "^10.0.23",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "fast-glob": "^3.1.1",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.23.2",
+    "prettier": "^1.19.0",
+    "sass": "^1.23.7",
     "sass-true": "^5.0.0",
-    "stylelint": "^11.1.1",
-    "stylelint-config-recommended-scss": "^4.0.0",
-    "stylelint-scss": "^3.12.0"
+    "stylelint": "^12.0.0",
+    "stylelint-config-recommended-scss": "^4.1.0",
+    "stylelint-scss": "^3.13.0",
+    "ts-jest": "^24.2.0",
+    "tsdx": "^0.11.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "git add"
+    ]
   },
   "stylelint": {
     "extends": "stylelint-config-recommended-scss",
     "rules": {
-      "string-quotes": "double"
+      "string-quotes": "double",
+      "property-no-unknown": [
+        true,
+        {
+          "ignoreProperties": "/scale./"
+        }
+      ]
     }
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "preset": "ts-jest"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -55,11 +101,18 @@
     "singleQuote": false,
     "overrides": [
       {
-        "files": "*.js",
+        "files": [
+          "*.js",
+          "*.ts",
+          "*.md"
+        ],
         "options": {
           "singleQuote": true
         }
       }
     ]
+  },
+  "dependencies": {
+    "tiny-invariant": "^1.0.6"
   }
 }
