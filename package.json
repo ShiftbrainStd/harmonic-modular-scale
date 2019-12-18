@@ -2,7 +2,7 @@
   "name": "@shiftbrainstd/harmonic-modular-scale",
   "description": "Harmonic Modular Scale Typography",
   "author": "Shiftbrain Standard Design Unit (https://standard.shiftbrain.com/)",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "module": "dist/harmomic-modular-scale.esm.js",
   "unpkg": "dist/harmomic-modular-scale.umd.production.min.js",
