@@ -135,4 +135,4 @@ export function createScale({
   }
 }
 
-export const scale = createScale()
+export default createScale()
