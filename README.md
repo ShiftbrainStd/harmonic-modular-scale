@@ -194,7 +194,7 @@ npm run test
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/devjam/harmonic-modular-scale/issues).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ShiftbrainStd/harmonic-modular-scale/issues).
 
 ## 📝 License
 
