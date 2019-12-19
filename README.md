@@ -12,9 +12,11 @@
 
 > Harmonic Modular Scale Typography
 
-A Sass module to manage your project’s typographic scale using a [harmonic progression](https://en.wikipedia.org/wiki/Harmonic_progression_(mathematics)).
+A Sass module to manage your project’s typographic scale using a [harmonic progression](<https://en.wikipedia.org/wiki/Harmonic_progression_(mathematics)>).
 
 See the [explanatory article](https://standard.shiftbrain.com/blog/harmonious-proportions-in-type-sizes) for details (Japanese).
+
+**This documentation refers to the Sass APIs. To use the library with JavaScript read the [documentation here](docs/javascript-api.md).**
 
 <!-- TOC -->
 
@@ -85,12 +87,12 @@ $sizes: hms.get-sizes($list);
 
 The `get-line-height` function accepts the following arguments:
 
-| argument              | type   | default | description                                                                                                                 |
-| --------------------- | ------ | ------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `$font-size-degree`   | number | 0       | An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.       |
-| `$line-height-degree` | number | null    | The increments of line height relative to the minimum height that can contain the current font size. It must be an integer. |
-| `$lines` | number | 1    | The number to multiply the line height for. |
-| `$as-line-height` | boolean | false | If true, returns the value relative to the current font-size. If false, returns the value relative to the root font size. |
+| argument              | type    | default | description                                                                                                                 |
+| --------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `$font-size-degree`   | number  | 0       | An integer indicating the font size in the harmonic scale. The returned value will be relative to the base font size.       |
+| `$line-height-degree` | number  | null    | The increments of line height relative to the minimum height that can contain the current font size. It must be an integer. |
+| `$lines`              | number  | 1       | The number to multiply the line height for.                                                                                 |
+| `$as-line-height`     | boolean | false   | If true, returns the value relative to the current font-size. If false, returns the value relative to the root font size.   |
 
 It will returns `line-hieght` value related to the `$base-font-size`. It is helpful when you need to set sizes based on typographic scale.
 
@@ -192,7 +194,7 @@ npm run test
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/devjam/harmonic-modular-scale/issues).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ShiftbrainStd/harmonic-modular-scale/issues).
 
 ## 📝 License
 

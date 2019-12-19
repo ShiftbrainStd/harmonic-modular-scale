@@ -1,6 +1,6 @@
 @use "sass:list";
 @use "true" as *;
-@use "../scss/index" as scale;
+@use "../../scss/index" as scale;
 
 @include describe("Main") {
   @include describe("@function get-line-height") {

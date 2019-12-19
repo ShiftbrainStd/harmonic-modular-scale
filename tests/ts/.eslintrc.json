@@ -1,0 +1,5 @@
+{
+  "root": true,
+  "extends": ["../../src/.eslintrc.json"],
+  "env": { "jest": true }
+}

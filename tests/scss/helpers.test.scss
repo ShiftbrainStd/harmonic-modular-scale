@@ -1,5 +1,5 @@
 @use "true" as *;
-@use "../scss/helpers" as h;
+@use "../../scss/helpers" as h;
 
 @include describe("Helpers") {
   @include describe("@function trunc") {
