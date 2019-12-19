@@ -46,7 +46,7 @@ npm install @shiftbrainstd/harmonic-modular-scale
 Import the module in your Sass file:
 
 ```scss
-@use "harmonic-modular-scale" as hms;
+@use "@shiftbrainstd/harmonic-modular-scale" as hms;
 ```
 
 This module exposes a main function and a mixin:
@@ -164,9 +164,9 @@ You can use the `get-sizes` function as the `polyrhythm-typography`’s type sca
 ```scss
 // main.scss
 @use "sass:meta";
-@use "harmonic-modular-scale";
+@use "@shiftbrainstd/harmonic-modular-scale";
 
-@use "polyrhythm-typography" as pt with (
+@use "@shiftbrainstd/polyrhythm-typography" as pt with (
   $type-scaler: meta.get-function("get-sizes", $module: "harmonic-modular-scale")
 );
 ```
